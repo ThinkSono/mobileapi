@@ -192,6 +192,35 @@ public class MobileApi
 
     public static final int MSG_COPY_RAW_DATA = 17;
 
+    //! Query the service with all available ultrasound probes and their connection status.
+    //!
+    //! The reply will be delived with the MSG_RETURN_PROBES.
+    //!
+    //! Parameters(s):
+    //! - Message.replyTo: client's Messenger where the reply should be sent. This field is mandatory; if missing, the query will be ignored.
+    //! - Message.arg1 (optional): callback parameter for MSG_RETURN_PROBES.
+    //!
+    //! \version Added in version x.x.x
+
+    public static final int MSG_LIST_PROBES = 18;
+
+    //! Select a scanner and try to connect to it. Follows the same behaviour as the "Select Scanner" UI element in the Clarius app. Tries to connect to the probes wifi automatically. Follows the connection setup as configured in the Clarius app, i.e. direct Wifi or pre-configured custom SSID.
+    //!
+    //! The MSG_RETURN_STATUS will be
+    //! - 0 if the scanner or scan application does not exist, if the license for the mobile API cannot be used or for any other reason the request for connection cannot be executed.
+    //! - 1 if the request was successful. This does not mean that the probe has been successfully connected. For this, listen to the MSG_PROBE_STATUS_CHANGED
+    //!
+    //! The event MSG_PROBE_STATUS_CHANGED will inform you whether the connection has succeeded.
+    //!
+    //! Parameter(s):
+    //! - Bundle[KEY_SELECTED_PROBE]: String, the serial number of the probe to connect to
+    //! - Message.replyTo (optional): if set, Messenger to send the MSG_RETURN_STATUS message to.
+    //! - Message.arg1 (optional): callback parameter for MSG_RETURN_STATUS.
+    //!
+    //! \version Added in version x.x.x
+
+    public static final int MSG_SELECT_PROBE = 19;
+
     // Messages from server to client.
 
     //! Return the outcome of a command sent by the client.
@@ -376,6 +405,28 @@ public class MobileApi
 
     public static final int MSG_RAW_DATA_COPIED = 123;
 
+    //! Reply to query MSG_LIST_PROBES
+    //!
+    //! Parameters:
+    //! - Bundle[KEY_PROBES]: me.clarius.mobileapi.Probes, a list of probes that are available to the current Clarius user
+    //! - Message.arg1: callback parameter copied from the Message.arg1 sent by the client.
+    //!
+    //! \version Added in version x.x.x
+
+    public static final int MSG_RETURN_PROBES = 124;
+
+    //! Server event for the current probe connection status
+    //!
+    //! Parameters:
+    //! - Message.arg1: int
+    //!    0 - a previously successfully connected probe disconnected or a connection attempt failed
+    //!    1 - probe connected successfully and is ready for imaging (bluetooth + wifi available)
+    //!
+    //! If a connection attempt failed (i.e status 0) the MSG_SELECT_PROBE needs to be initiated again. The MobileAPI does not retry a failed attempt for you.
+    //!
+    //! \version Added in version x.x.x
+    public static final int MSG_PROBE_STATUS_CHANGED = 125;
+
     // Bundle keys
 
     public static final String KEY_IMAGE_SIZE = "size";
@@ -405,6 +456,8 @@ public class MobileApi
     public static final String KEY_CAPTURE_ID = "captureID";
     public static final String KEY_FILE_NAME = "fileName";
     public static final String KEY_SIZE_BYTES = "sizeBytes";
+    public static final String KEY_SELECTED_PROBE = "selectedProbe";
+    public static final String KEY_PROBES = "listProbes";
 
     // Predefined bundle values
 

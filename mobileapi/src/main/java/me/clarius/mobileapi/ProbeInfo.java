@@ -9,6 +9,7 @@ public class ProbeInfo implements Parcelable
 {
     public String model;        //!< model type
     public String serial;       //!< serial #
+    public String name;         //!< nick name of the scanner, added in version x.x.x
     public int battery;         //!< battery percentage
     public int temperature;     //!< temperature percentage (of max)
     public int version;         //!< version (1 = Clarius 1st Generation, 2 = Clarius HD)
@@ -22,7 +23,8 @@ public class ProbeInfo implements Parcelable
     {
         model = "";
         serial = "";
-        battery = 0;
+        name = "";
+	battery = 0;
         temperature = 0;
         version = 0;
         elements = 0;
@@ -55,6 +57,13 @@ public class ProbeInfo implements Parcelable
         battery = in.readInt();
         serial = in.readString();
         model = in.readString();
+	// Added in version x.x.x:
+	try {
+	    name = in.readString();
+	} catch (Exception e) {
+	    // TODO(sven): Check if actual exception occcurs
+	    // NOTE(sven): Read if available, don't crash for backwards compatibility
+	}
     }
 
     @Override
@@ -69,6 +78,8 @@ public class ProbeInfo implements Parcelable
         out.writeInt(battery);
         out.writeString(serial);
         out.writeString(model);
+	// Added in version x.x.x:
+        out.writeString(name);
     }
 
     @Override
