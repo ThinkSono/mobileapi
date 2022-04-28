@@ -62,7 +62,7 @@ public class Probe implements Parcelable
 
 public class Probes implements Parcelable
 {
-    public Probes[] probes;
+    public Probe[] probes;
 
     //! Default constructor sets everything to zero.
     //! Note: required for JNI for Android 8 API 26.
