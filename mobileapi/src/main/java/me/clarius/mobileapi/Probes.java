@@ -66,7 +66,7 @@ public class Probes implements Parcelable
 
     //! Default constructor sets everything to zero.
     //! Note: required for JNI for Android 8 API 26.
-    public Probe()
+    public Probes()
     {
         probes = null
     }
