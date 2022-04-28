@@ -14,6 +14,7 @@ public class Probe implements Parcelable
     public String name;         //!< nick name of the scanner
     public int version;         //!< version (1 = Clarius 1st Generation, 2 = Clarius HD)
     public int battery;         //!< battery percentage, 0 if scanner is not available
+    public boolean isVirtual;    //!< true, if the scanner is a virtual demo scanner
     public boolean isAvailable; //!< true, if the scanner is ready to connect
     public boolean isConnected; //!< true, if the scanner is connected and ready for imaging
 
@@ -65,7 +66,7 @@ public class Probes implements Parcelable
 
     //! Default constructor sets everything to zero.
     //! Note: required for JNI for Android 8 API 26.
-    public ProbeInfo()
+    public Probe()
     {
         probes = null
     }
