@@ -58,12 +58,7 @@ public class ProbeInfo implements Parcelable
         serial = in.readString();
         model = in.readString();
 	// Added in version x.x.x:
-	try {
-	    name = in.readString();
-	} catch (Exception e) {
-	    // TODO(sven): Check if actual exception occcurs
-	    // NOTE(sven): Read if available, don't crash for backwards compatibility
-	}
+	name = in.readString();
     }
 
     @Override
