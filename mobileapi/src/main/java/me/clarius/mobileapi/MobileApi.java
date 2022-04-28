@@ -200,6 +200,7 @@ public class MobileApi
     //! - Message.replyTo: client's Messenger where the reply should be sent. This field is mandatory; if missing, the query will be ignored.
     //! - Message.arg1 (optional): callback parameter for MSG_RETURN_PROBES.
     //!
+    //! MSG_RETURN_STATUS Message.arg2 will be 0 if the request failed, i.e. the Clarius user is not logged in and the available probes cannot be retrieved.
     //! \version Added in version x.x.x
 
     public static final int MSG_LIST_PROBES = 18;
