@@ -214,7 +214,8 @@ public class MobileApi
     //! The event MSG_PROBE_STATUS_CHANGED will inform you whether the connection has succeeded.
     //!
     //! Parameter(s):
-    //! - Bundle[KEY_SELECTED_PROBE]: String, the serial number of the probe to connect to
+    //! - Bundle[KEY_SELECT_PROBE]: String, the serial number of the probe to connect to
+    //! - Bundle[KEY_SELECT_APPLICATION]: String, the name of the application to use for the scanner, i.e. vascular. A list of available applications is defined here: TODO
     //! - Message.replyTo (optional): if set, Messenger to send the MSG_RETURN_STATUS message to.
     //! - Message.arg1 (optional): callback parameter for MSG_RETURN_STATUS.
     //!
@@ -457,7 +458,8 @@ public class MobileApi
     public static final String KEY_CAPTURE_ID = "captureID";
     public static final String KEY_FILE_NAME = "fileName";
     public static final String KEY_SIZE_BYTES = "sizeBytes";
-    public static final String KEY_SELECTED_PROBE = "selectedProbe";
+    public static final String KEY_SELECT_PROBE = "selectProbe";
+    public static final String KEY_SELECT_APPLICATION = "selectApplication";
     public static final String KEY_PROBES = "listProbes";
 
     // Predefined bundle values
